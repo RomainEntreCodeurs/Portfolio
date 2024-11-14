@@ -1,0 +1,86 @@
+{
+  "navbar": {
+    "aboutMe": "About Me",
+    "projects": "My Projects",
+    "journey": "My Journey",
+    "contact": "Contact"
+  },
+  "footer": {
+    "year": "©2024",
+    "person": "Romain GILOT",
+    "text": "All rights reserved."
+  },
+  "home": {
+    "welcome": "Welcome to my portfolio",
+    "title": "Full-Stack Developer",
+    "message": "Find all the information about me on this website! 😄",
+    "textButton": "View my Resume"
+  },
+  "aboutMe": {
+    "sectionTitle": "Who am I?",
+    "description": "A little 20-year-old digital explorer seeking digital superpowers to become a click and code expert. On a quest for IT skills with seriousness and determination! 🚀",
+    "linkedinText": "Find me on LinkedIn"
+  },
+  "contact": {
+    "title": "Contact Me",
+    "subTitle": "Want to get in touch?",
+    "email": {
+      "label": "Email",
+      "text": "contact@romain-gilot.fr",
+      "action": "Send an email"
+    },
+    "website": {
+      "label": "Website",
+      "text": "www.romain-gilot.fr",
+      "action": "Visit the website"
+    },
+    "location": {
+      "label": "Location",
+      "text": "Metz, France",
+      "action": "View on map"
+    }
+  },
+  "journey": {
+    "title": "My Journey",
+    "subTitle": "What's my background?",
+    "education": [
+      {
+        "label": "General Baccalaureate",
+        "duration": "2018-2021",
+        "link": "#"
+      },
+      {
+        "label": "BTS SIO SLAM",
+        "duration": "2021-2023",
+        "link": "https://www.onisep.fr/ressources/univers-formation/formations/post-bac/bts-services-informatiques-aux-organisations-option-b-solutions-logicielles-et-applications-metiers"
+      },
+      {
+        "label": "Bachelor Full-Stack Developer",
+        "duration": "2023-2024",
+        "link": "https://www.metz-numeric-school.fr/fr/formations/developpement-informatique/developpeur-full-stack-en-alternance"
+      }
+    ]
+  },
+  "projects": {
+    "title": "My Projects",
+    "subtitle": "I have completed a few projects, check them out!",
+    "textButton": "Learn more",
+    "portfolio": {
+      "title": "Portfolio",
+      "message": "This project is the website you are currently visiting! Enjoy your stay :)"
+    },
+    "gdept": {
+      "title": "GDEPT",
+      "message": "This project was completed during my internship at SDIS57."
+    },
+    "access": {
+      "title": "Access",
+      "message": "This project was completed as part of my Full-Stack Developer Bachelor's degree."
+    }
+  },
+  "error": {
+    "title": "Oops, an error occurred!",
+    "message": "It seems the page you are looking for doesn't exist...",
+    "button": "Back to home"
+  }
+}

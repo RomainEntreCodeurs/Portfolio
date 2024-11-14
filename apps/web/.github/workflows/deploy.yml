@@ -1,0 +1,51 @@
+name: Déployer l'application React et le serveur API
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Vérifier le code
+        uses: actions/checkout@v2
+
+      - name: Configurer Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+
+      - name: Installer les dépendances
+        run: npm install
+
+      - name: Construire l'application
+        run: npm run build
+
+      - name: Ajouter le fichier .htaccess
+        run: |
+          echo '<IfModule mod_rewrite.c>
+            RewriteEngine On
+            RewriteBase /
+            RewriteRule ^index\.html$ - [L]
+            RewriteCond %{REQUEST_FILENAME} !-f
+            RewriteCond %{REQUEST_FILENAME} !-d
+            RewriteRule . /index.html [L]
+          </IfModule>' > build/.htaccess
+
+      - name: Déployer sur le VPS
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          VPS_HOST: ${{ secrets.VPS_IP }}
+        run: |
+          echo "$SSH_PRIVATE_KEY" > private_key
+          chmod 600 private_key
+          # Copier les fichiers de construction et le répertoire src/server
+          scp -o StrictHostKeyChecking=no -i private_key -r build/* $VPS_USER@$VPS_HOST:/var/www/portfolio/
+          scp -o StrictHostKeyChecking=no -i private_key -r src/server $VPS_USER@$VPS_HOST:/var/www/portfolio/
+          scp -o StrictHostKeyChecking=no -i private_key package.json $VPS_USER@$VPS_HOST:/var/www/portfolio/
+          # Exécuter npm install dans le répertoire de déploiement pour le serveur
+          ssh -o StrictHostKeyChecking=no -i private_key $VPS_USER@$VPS_HOST "cd /var/www/portfolio/server && npm install --production"
