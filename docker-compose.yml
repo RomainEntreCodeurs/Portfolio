@@ -13,25 +13,34 @@ services:
       - '5432:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - portfolio-network
 
   api:
     build:
-      context: .
-      dockerfile: ./apps/api/docker/Dockerfile
+      context: ./apps/api/
+      dockerfile: Dockerfile
     container_name: portfolio-api
     restart: always
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_HOST: portfolio-db
       JWT_SECRET: ${JWT_SECRET}
     ports:
-      - '3000:3000'
+      - '3001:3001'
     depends_on:
       - database
+    networks:
+      - portfolio-network
     volumes:
-      - .:/app
+      - ./apps/api:/app:delegated
+      - /app/node_modules
 
 volumes:
   postgres_data:
+
+networks:
+  portfolio-network:
+    driver: bridge
